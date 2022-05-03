@@ -5,19 +5,128 @@ var matriz =
     [".", ".", ".", "*", "*", ".", ".", "."],
     [".", ".", ".", ".", ".", ".", ".", "."]];
 
-const buscarCelulaMuertaTresVecinos = async () => {
-
+const busquedavecinos = (i, j) => new Promise((res, rej) => {
     var matriz2 = [...matriz];
+    let vecinosvivos = 0;
+    let vecinosmuertos = 0;
 
-    for (i = 0; i < matriz2.length; i++) {
-        for (j = 0; j < matriz2.length; j++) {
-
-            let vecinosvivos = 0;
-            let vecinosmuertos = 0;
-
-            if (i === 0) {
-                if (j === 0) {
+    // vecinos vivos.
+    if (i === 0) {
+        if (j === 0) {
+            if (matriz2[i][j + 1] == "*") {
+                vecinosvivos++;
+            }
+            if (matriz2[i + 1][j] == "*") {
+                vecinosvivos++;
+            }
+            if (matriz2[i + 1][j + 1] == "*") {
+                vecinosvivos++;
+            }
+        } else {
+            if (j == matriz2[i].length - 1) {
+                if (matriz2[i][j - 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j - 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j] == "*") {
+                    vecinosvivos++;
+                }
+            } else {
+                if (matriz2[i][j - 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i][j + 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j - 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j + 1] == "*") {
+                    vecinosvivos++;
+                }
+            }
+        }
+    } else {
+        if (j === 0) {
+            if (i === matriz.length - 1) {
+                if (matriz2[i][j + 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i - 1][j] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i - 1][j + 1] == "*") {
+                    vecinosvivos++;
+                }
+            } else {
+                if (matriz2[i - 1][j] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i - 1][j + 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i][j + 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j + 1] == "*") {
+                    vecinosvivos++;
+                }
+            }
+        } else {
+            if (i === matriz.length - 1) {
+                if (matriz2[i][j - 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i - 1][j - 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i - 1][j] == "*") {
+                    vecinosvivos++;
+                }
+            } else {
+                if (i === matriz2 - 1) {
+                    if (matriz2[i][j - 1] == "*") {
+                        vecinosvivos++;
+                    }
                     if (matriz2[i][j + 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j - 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j + 1] == "*") {
+                        vecinosvivos++;
+                    }
+                }
+                else {
+
+                    if (matriz2[i - 1][j - 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j + 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i][j - 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i][j + 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i + 1][j - 1] == "*") {
                         vecinosvivos++;
                     }
                     if (matriz2[i + 1][j] == "*") {
@@ -26,116 +135,159 @@ const buscarCelulaMuertaTresVecinos = async () => {
                     if (matriz2[i + 1][j + 1] == "*") {
                         vecinosvivos++;
                     }
-                } else {
-                    if (j == matriz2[i].length - 1) {
-                        if (matriz2[i][j - 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i + 1][j - 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i + 1][j] == "*") {
-                            vecinosvivos++;
-                        }
-                    } else {
-                        if (matriz2[i][j - 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i][j + 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i + 1][j - 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i + 1][j] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i + 1][j + 1] == "*") {
-                            vecinosvivos++;
-                        }
-                    }
+
                 }
-            } else {
-                if (j === 0) {
-                    if (i === matriz.length - 1) {
-                        if (matriz2[i][j + 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i - 1][j] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i - 1][j + 1] == "*") {
-                            vecinosvivos++;
-                        }
-                    } else {
-                        if (matriz2[i - 1][j] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i - 1][j + 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i][j + 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i + 1][j] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i + 1][j + 1] == "*") {
-                            vecinosvivos++;
-                        }
-                    }
-                } else {
-                    if (i === matriz.length - 1) {
-                        if (matriz2[i][j - 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i - 1][j - 1] == "*") {
-                            vecinosvivos++;
-                        }
-                        if (matriz2[i - 1][j] == "*") {
-                            vecinosvivos++;
-                        }
-                    } else {
-                        if (i === matriz2 - 1) {
-                            if (matriz2[i][j - 1] == "*") {
-                                vecinosvivos++;
-                            }
-                            if (matriz2[i][j + 1] == "*") {
-                                vecinosvivos++;
-                            }
-                            if (matriz2[i - 1][j - 1] == "*") {
-                                vecinosvivos++;
-                            }
-                            if (matriz2[i - 1][j] == "*") {
-                                vecinosvivos++;
-                            }
-                            if (matriz2[i - 1][j + 1] == "*") {
-                                vecinosvivos++;
-                            }
-                        }
-                        else {
 
-                            if (matriz2[i + 1][j - 1] == "*") {
-                                vecinosvivos++;
-                            }
-                            if (matriz2[i + 1][j] == "*") {
-                                vecinosvivos++;
-                            }
-                            if (matriz2[i + 1][j + 1] == "*") {
-                                vecinosvivos++;
-                            }
-
-                        }
-
-                    }
-                }
-            }
-            if(vecinosvivos>2){
-                matriz2[i][j]="*"; 
             }
         }
     }
-}
 
-buscarCelulaMuertaTresVecinos();
-console.log(matriz2[0].toString() + "\n" + matriz2[1].toString() + "\n" + matriz2[2].toString() + "\n" + matriz2[3].toString() + "\n");
+    // vecinos muertos
+    if (i === 0) {
+        if (j === 0) {
+            if (matriz2[i][j + 1] == ".") {
+                vecinosmuertos++;
+            }
+            if (matriz2[i + 1][j] == ".") {
+                vecinosmuertos++;
+            }
+            if (matriz2[i + 1][j + 1] == ".") {
+                vecinosmuertos++;
+            }
+        } else {
+            if (j == matriz2[i].length - 1) {
+                if (matriz2[i][j - 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j - 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j] == ".") {
+                    vecinosmuertos++;
+                }
+            } else {
+                if (matriz2[i][j - 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i][j + 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j - 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j + 1] == ".") {
+                    vecinosmuertos++;
+                }
+            }
+        }
+    } else {
+        if (j === 0) {
+            if (i === matriz.length - 1) {
+                if (matriz2[i][j + 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i - 1][j] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i - 1][j + 1] == ".") {
+                    vecinosmuertos++;
+                }
+            } else {
+                if (matriz2[i - 1][j] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i - 1][j + 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i][j + 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j + 1] == ".") {
+                    vecinosmuertos++;
+                }
+            }
+        } else {
+            if (i === matriz.length - 1) {
+                if (matriz2[i][j - 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i - 1][j - 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i - 1][j] == ".") {
+                    vecinosmuertos++;
+                }
+            } else {
+                if (i === matriz2 - 1) {
+                    if (matriz2[i][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i][j + 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j + 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                }
+                else {
+                    if (matriz2[i - 1][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j + 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i][j + 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i + 1][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i + 1][j] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i + 1][j + 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                }
+            }
+        }
+    }
+
+    res({ vecinosvivos, vecinosmuertos })
+})
+
+var i = 0;
+matriz.forEach((item) => {
+    var j = 0;
+    item.forEach((casilla) => {
+        busquedavecinos(i, j).then(dato => { 
+            console.log(dato);
+            if(dato.vecinosvivos == 3){
+                matriz[i][j]="*";
+            }
+        });
+        j++;
+    })
+    i++;
+})
+
+
+//console.log(matriz2[0].toString() + "\n" + matriz2[1].toString() + "\n" + matriz2[2].toString() + "\n" + matriz2[3].toString() + "\n");
