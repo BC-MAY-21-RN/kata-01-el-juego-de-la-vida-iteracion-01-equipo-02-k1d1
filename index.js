@@ -52,8 +52,8 @@ const busquedavecinos = (i, j) => new Promise((res, rej) => {
             }
         }
     } else {
-        if (j === 0) {
-            if (i === matriz.length - 1) {
+        if (i == matriz2.length - 1) {
+            if (j == 0) {
                 if (matriz2[i][j + 1] == "*") {
                     vecinosvivos++;
                 }
@@ -64,6 +64,37 @@ const busquedavecinos = (i, j) => new Promise((res, rej) => {
                     vecinosvivos++;
                 }
             } else {
+                if (j == matriz2[i].length - 1) {
+                    if (matriz2[i][j - 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j - 1] == "*") {
+                        vecinosvivos++;
+                    }
+                } else {
+                    if (matriz2[i][j - 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i][j + 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j - 1] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j] == "*") {
+                        vecinosvivos++;
+                    }
+                    if (matriz2[i - 1][j + 1] == "*") {
+                        vecinosvivos++;
+                    }
+                }
+            }
+
+        } else {
+            if (j === 0) {
                 if (matriz2[i - 1][j] == "*") {
                     vecinosvivos++;
                 }
@@ -79,65 +110,31 @@ const busquedavecinos = (i, j) => new Promise((res, rej) => {
                 if (matriz2[i + 1][j + 1] == "*") {
                     vecinosvivos++;
                 }
-            }
-        } else {
-            if (i === matriz.length - 1) {
-                if (matriz2[i][j - 1] == "*") {
-                    vecinosvivos++;
-                }
+            } else {
                 if (matriz2[i - 1][j - 1] == "*") {
                     vecinosvivos++;
                 }
                 if (matriz2[i - 1][j] == "*") {
                     vecinosvivos++;
                 }
-            } else {
-                if (i === matriz2 - 1) {
-                    if (matriz2[i][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i][j + 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j + 1] == "*") {
-                        vecinosvivos++;
-                    }
+                if (matriz2[i - 1][j + 1] == "*") {
+                    vecinosvivos++;
                 }
-                else {
-
-                    if (matriz2[i - 1][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j + 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i][j + 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i + 1][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i + 1][j] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i + 1][j + 1] == "*") {
-                        vecinosvivos++;
-                    }
-
+                if (matriz2[i][j - 1] == "*") {
+                    vecinosvivos++;
                 }
-
+                if (matriz2[i][j + 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j - 1] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j] == "*") {
+                    vecinosvivos++;
+                }
+                if (matriz2[i + 1][j + 1] == "*") {
+                    vecinosvivos++;
+                }
             }
         }
     }
@@ -184,8 +181,8 @@ const busquedavecinos = (i, j) => new Promise((res, rej) => {
             }
         }
     } else {
-        if (j === 0) {
-            if (i === matriz.length - 1) {
+        if (i == matriz2.length - 1) {
+            if (j == 0) {
                 if (matriz2[i][j + 1] == ".") {
                     vecinosmuertos++;
                 }
@@ -196,6 +193,37 @@ const busquedavecinos = (i, j) => new Promise((res, rej) => {
                     vecinosmuertos++;
                 }
             } else {
+                if (j == matriz2[i].length - 1) {
+                    if (matriz2[i][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                } else {
+                    if (matriz2[i][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i][j + 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j - 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j] == ".") {
+                        vecinosmuertos++;
+                    }
+                    if (matriz2[i - 1][j + 1] == ".") {
+                        vecinosmuertos++;
+                    }
+                }
+            }
+
+        } else {
+            if (j === 0) {
                 if (matriz2[i - 1][j] == ".") {
                     vecinosmuertos++;
                 }
@@ -211,77 +239,45 @@ const busquedavecinos = (i, j) => new Promise((res, rej) => {
                 if (matriz2[i + 1][j + 1] == ".") {
                     vecinosmuertos++;
                 }
-            }
-        } else {
-            if (i === matriz.length - 1) {
-                if (matriz2[i][j - 1] == ".") {
-                    vecinosmuertos++;
-                }
+            } else {
                 if (matriz2[i - 1][j - 1] == ".") {
                     vecinosmuertos++;
                 }
                 if (matriz2[i - 1][j] == ".") {
                     vecinosmuertos++;
                 }
-            } else {
-                if (i === matriz2 - 1) {
-                    if (matriz2[i][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i][j + 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j + 1] == ".") {
-                        vecinosmuertos++;
-                    }
+                if (matriz2[i - 1][j + 1] == ".") {
+                    vecinosmuertos++;
                 }
-                else {
-                    if (matriz2[i - 1][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j + 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i][j + 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i + 1][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i + 1][j] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i + 1][j + 1] == ".") {
-                        vecinosmuertos++;
-                    }
+                if (matriz2[i][j - 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i][j + 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j - 1] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j] == ".") {
+                    vecinosmuertos++;
+                }
+                if (matriz2[i + 1][j + 1] == ".") {
+                    vecinosmuertos++;
                 }
             }
         }
     }
-
-    res({ vecinosvivos, vecinosmuertos })
+    res({ vecinosvivos, vecinosmuertos, i, j })
 })
 
 var i = 0;
 matriz.forEach((item) => {
     var j = 0;
     item.forEach((casilla) => {
-        busquedavecinos(i, j).then(dato => { 
+        busquedavecinos(i, j).then(dato => {
             console.log(dato);
-            if(dato.vecinosvivos == 3){
-                matriz[i][j]="*";
+            if (dato.vecinosvivos == 3) {
+                //matriz[i][j] = "*";
             }
         });
         j++;
