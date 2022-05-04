@@ -1,313 +1,117 @@
-// matriz inicial.
-var matriz =
-    [[".", ".", ".", ".", ".", ".", ".", "."],
-    [".", ".", ".", ".", "*", ".", ".", "."],
-    [".", ".", ".", "*", "*", ".", ".", "."],
-    [".", ".", ".", ".", ".", ".", ".", "."]];
+function randomNumero(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
-// primer matriz impresa en consola.
-console.log(matriz[0].toString().replaceAll(","," ")+"\n"+matriz[1].toString().replaceAll(","," ")+"\n"+matriz[2].toString().replaceAll(","," ")+"\n"+matriz[3].toString().replaceAll(","," ")+"\n");
+function stringMatriz(array, fila) {
+    if (fila == array.length) return "\n";
+    return array[fila].toString().replaceAll(",", " ") + "\n" + stringMatriz(array, fila + 1);
+}
 
-// Promesa para buscar los vecinos de cada casilla.
-const busquedavecinos = (i, j) => new Promise((res, rej) => {
-    var matriz2 = [...matriz];
+function vecinos(array, i, j) {
     let vecinosvivos = 0;
     let vecinosmuertos = 0;
-
-    // Validaciones para contar vecinos vivos.
-    if (i === 0) {
-        if (j === 0) {
-            if (matriz2[i][j + 1] == "*") {
-                vecinosvivos++;
-            }
-            if (matriz2[i + 1][j] == "*") {
-                vecinosvivos++;
-            }
-            if (matriz2[i + 1][j + 1] == "*") {
-                vecinosvivos++;
-            }
-        } else {
-            if (j == matriz2[i].length - 1) {
-                if (matriz2[i][j - 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j - 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j] == "*") {
-                    vecinosvivos++;
-                }
-            } else {
-                if (matriz2[i][j - 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j - 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-            }
-        }
+    if (i - 1 === -1) {
+        if (array[i][j - 1] == "*") {
+            vecinosvivos++;
+        } else array[i][j - 1] == "." ? vecinosmuertos++ : null;
+        if (array[i][j + 1] == "*") {
+            vecinosvivos++;
+        } else array[i][j + 1] == "." ? vecinosmuertos++ : null;
+        if (array[i + 1][j - 1] == "*") {
+            vecinosvivos++;
+        } else array[i + 1][j - 1] == "." ? vecinosmuertos++ : null;
+        if (array[i + 1][j] == "*") {
+            vecinosvivos++;
+        } else array[i + 1][j] == "." ? vecinosmuertos++ : null;
+        if (array[i + 1][j + 1] == "*") {
+            vecinosvivos++;
+        } else array[i + 1][j + 1] == "." ? vecinosmuertos++ : null;
+    } else if (i + 1 === array.length) {
+        if (array[i][j - 1] == "*") {
+            vecinosvivos++;
+        } else array[i][j - 1] == "." ? vecinosmuertos++ : null;
+        if (array[i][j + 1] == "*") {
+            vecinosvivos++;
+        } else array[i][j + 1] == "." ? vecinosmuertos++ : null;
+        if (array[i - 1][j - 1] == "*") {
+            vecinosvivos++;
+        } else array[i - 1][j - 1] == "." ? vecinosmuertos++ : null;
+        if (array[i - 1][j] == "*") {
+            vecinosvivos++;
+        } else array[i - 1][j] == "." ? vecinosmuertos++ : null;
+        if (array[i - 1][j + 1] == "*") {
+            vecinosvivos++;
+        } else array[i - 1][j + 1] == "." ? vecinosmuertos++ : null;
     } else {
-        if (i == matriz2.length - 1) {
-            if (j == 0) {
-                if (matriz2[i][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i - 1][j] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i - 1][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-            } else {
-                if (j == matriz2[i].length - 1) {
-                    if (matriz2[i][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                } else {
-                    if (matriz2[i][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i][j + 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j - 1] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j] == "*") {
-                        vecinosvivos++;
-                    }
-                    if (matriz2[i - 1][j + 1] == "*") {
-                        vecinosvivos++;
-                    }
-                }
-            }
-
-        } else {
-            if (j === 0) {
-                if (matriz2[i - 1][j] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i - 1][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-            } else {
-                if (matriz2[i - 1][j - 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i - 1][j] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i - 1][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i][j - 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j - 1] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j] == "*") {
-                    vecinosvivos++;
-                }
-                if (matriz2[i + 1][j + 1] == "*") {
-                    vecinosvivos++;
-                }
-            }
-        }
+        if (matriz2[i - 1][j - 1] == "*") {
+            vecinosvivos++;
+        } else matriz2[i - 1][j - 1] == "." ? vecinosmuertos++ : null;
+        if (matriz2[i - 1][j] == "*") {
+            vecinosvivos++;
+        } else matriz2[i - 1][j] == "." ? vecinosmuertos++ : null;
+        if (matriz2[i - 1][j + 1] == "*") {
+            vecinosvivos++;
+        } else matriz2[i - 1][j + 1] == "." ? vecinosmuertos++ : null;
+        if (matriz2[i][j - 1] == "*") {
+            vecinosvivos++;
+        } else matriz2[i][j - 1] == "." ? vecinosmuertos++ : null;
+        if (matriz2[i][j + 1] == "*") {
+            vecinosvivos++;
+        } else matriz2[i][j + 1] == "." ? vecinosmuertos++ : null;
+        if (matriz2[i + 1][j - 1] == "*") {
+            vecinosvivos++;
+        } else matriz2[i + 1][j - 1] == "." ? vecinosmuertos++ : null;
+        if (matriz2[i + 1][j] == "*") {
+            vecinosvivos++;
+        } else matriz2[i + 1][j] == "." ? vecinosmuertos++ : null;
+        if (matriz2[i + 1][j + 1] == "*") {
+            vecinosvivos++;
+        } else matriz2[i + 1][j + 1] == "." ? vecinosmuertos++ : null;
     }
+    return { vecinosvivos, vecinosmuertos, i, j, caracter: array[i][j] }
+}
 
-    // Validaciones para contar vecinos muertos.
-    if (i === 0) {
-        if (j === 0) {
-            if (matriz2[i][j + 1] == ".") {
-                vecinosmuertos++;
-            }
-            if (matriz2[i + 1][j] == ".") {
-                vecinosmuertos++;
-            }
-            if (matriz2[i + 1][j + 1] == ".") {
-                vecinosmuertos++;
-            }
-        } else {
-            if (j == matriz2[i].length - 1) {
-                if (matriz2[i][j - 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j - 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j] == ".") {
-                    vecinosmuertos++;
-                }
-            } else {
-                if (matriz2[i][j - 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j - 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-            }
-        }
-    } else {
-        if (i == matriz2.length - 1) {
-            if (j == 0) {
-                if (matriz2[i][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i - 1][j] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i - 1][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-            } else {
-                if (j == matriz2[i].length - 1) {
-                    if (matriz2[i][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                } else {
-                    if (matriz2[i][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i][j + 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j - 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j] == ".") {
-                        vecinosmuertos++;
-                    }
-                    if (matriz2[i - 1][j + 1] == ".") {
-                        vecinosmuertos++;
-                    }
-                }
-            }
-
-        } else {
-            if (j === 0) {
-                if (matriz2[i - 1][j] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i - 1][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-            } else {
-                if (matriz2[i - 1][j - 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i - 1][j] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i - 1][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i][j - 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j - 1] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j] == ".") {
-                    vecinosmuertos++;
-                }
-                if (matriz2[i + 1][j + 1] == ".") {
-                    vecinosmuertos++;
-                }
-            }
-        }
-    }
-
-    // respuesta de promesa con un json.
-    res({ vecinosvivos, vecinosmuertos, i, j, status: matriz2[i][j] });
-})
-
-// Promesa para un ciclo de vida.
-var ciclodevida = () => new Promise((res, rej) => {
-    matriz.forEach(async (item, indexi) => {
-        item.forEach(async (casilla, indexj) => {
+function newMatriz(array) {
+    array.forEach(async (fila, indexi) => {
+        fila.forEach(async (casilla, indexj) => {
+            let dato = vecinos(array, indexi, indexj);
             const x = indexi;
             const y = indexj;
-            let dato = await busquedavecinos(x, y);
-            if (dato.vecinosvivos == 3 && dato.status == ".") {
-                matriz[x][y] = "*";
+            if (dato.vecinosvivos == 3 && dato.caracter == ".") {
+                array[x][y] = "*";
             }
-            if (dato.vecinosvivos < 2  && dato.status == "*") {
-                matriz[x][y] = ".";
+            if (dato.vecinosvivos < 2 && dato.caracter == "*") {
+                array[x][y] = ".";
             }
-            if (dato.vecinosvivos > 3  && dato.status == "*") {
-                matriz[x][y] = ".";
+            if (dato.vecinosvivos > 3 && dato.caracter == "*") {
+                array[x][y] = ".";
             }
-            if (dato.vecinosvivos == 3 || dato.vecinosvivos == 2  && dato.status == "*") {
-                matriz[x][y] = "*";
+            if (dato.vecinosvivos == 3 || dato.vecinosvivos == 2 && dato.caracter == "*") {
+                array[x][y] = "*";
             }
-            // respuesta de la matriz nueva.
-            res(matriz)
         })
+    })
+    return array;
+}
+
+// Constantes iniciales.
+const x = 15;
+const y = 15;
+const cadena = "*....*...........*..***.";
+
+// generar matriz.
+let matriz = new Array(x).fill(".").map(item => (new Array(y).fill(".")));
+let matriz2 = [...matriz];
+
+// Rellenar matriz.
+matriz.forEach(async (fila, indexi) => {
+    fila.forEach(async (casilla, indexj) => {
+        matriz2[indexi][indexj] = cadena.charAt(randomNumero(0, cadena.length - 1));
     })
 })
 
-// Ejecuta promesa del primer ciclo de vida.
-ciclodevida().then(dato=>{
-    console.log(dato[0].toString().replaceAll(","," ")+"\n"+dato[1].toString().replaceAll(","," ")+"\n"+dato[2].toString().replaceAll(","," ")+"\n"+dato[3].toString().replaceAll(","," ")+"\n");
-})
+console.log(stringMatriz(matriz2, 0));
 
-// Ejecuta promesa del segundo ciclo de vida.
-ciclodevida().then(dato=>{
-    console.log(dato[0].toString().replaceAll(","," ")+"\n"+dato[1].toString().replaceAll(","," ")+"\n"+dato[2].toString().replaceAll(","," ")+"\n"+dato[3].toString().replaceAll(","," ")+"\n");
-})
-
+setInterval(() => {
+    console.log(stringMatriz(newMatriz(matriz2), 0));
+}, 2000);
